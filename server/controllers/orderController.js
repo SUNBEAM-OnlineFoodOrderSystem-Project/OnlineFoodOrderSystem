@@ -10,7 +10,7 @@ exports.placeOrder = async (req, res) => {
     }
 
     // 1. Insert into orders
-    const [orderResult] = await db.query(
+    const orderResult = await db.query(
       `INSERT INTO orders (user_id, restaurant_id, total_amount) VALUES (?, ?, ?)`,
       [userId, restaurant_id, total_amount]
     );
@@ -21,7 +21,7 @@ exports.placeOrder = async (req, res) => {
       const { menu_id, quantity } = item;
 
       // Get item price and name from menus table
-      const [menuData] = await db.query(`SELECT price, item_name FROM menus WHERE id = ?`, [menu_id]);
+      const menuData = await db.query(`SELECT price, item_name FROM menus WHERE id = ?`, [menu_id]);
       if (menuData.length === 0) {
         return res.status(400).json({ message: `Menu item with ID ${menu_id} not found` });
       }
