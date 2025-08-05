@@ -1,0 +1,66 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment files
+.env
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Database dumps/backups
+*.sql
+*.sqlite
+*.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Debugging / system files
+*.pid
+*.seed.js
+
+# Coverage and test reports
+coverage/
+nyc_output/
+jest/
+
+# Build folders (if you transpile)
+dist/
+build/
+
+# React Native - mobile app artifacts
+android/.gradle/
+android/app/build/
+android/build/
+ios/build/
+ios/Pods/
+ios/Podfile.lock
+*.keystore
+*.jks
+
+# Expo / React Native specific
+.expo/
+.expo-shared/
+
+# Cache
+.cache/
+tmp/
+temp/
