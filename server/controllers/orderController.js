@@ -47,3 +47,68 @@ exports.placeOrder = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+
+
+
+
+
+
+
+const orderModel = require('../models/orderModel');
+
+// View all orders for logged-in user
+exports.getMyOrders = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const orders = await orderModel.getOrdersByUserId(userId);
+
+    res.status(200).json({
+      message: 'Orders fetched successfully',
+      orders,
+    });
+  } catch (error) {
+    console.error('Get My Orders Error:', error);
+    res.status(500).json({ message: 'Server error while fetching orders' });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+exports.cancelOrder = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const orderId = req.params.id;
+
+    const order = await orderModel.getOrderByIdAndUser(orderId, userId);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found or access denied' });
+    }
+
+    if (order.status === 'cancelled') {
+      return res.status(400).json({ message: 'Order already cancelled' });
+    }
+
+    if (order.status === 'delivered') {
+      return res.status(400).json({ message: 'Delivered order cannot be cancelled' });
+    }
+
+    await orderModel.cancelOrder(orderId);
+
+    res.status(200).json({ message: 'Order cancelled successfully' });
+  } catch (error) {
+    console.error('Cancel Order Error:', error);
+    res.status(500).json({ message: 'Server error while cancelling order' });
+  }
+};

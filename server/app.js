@@ -22,6 +22,7 @@ app.use('/api/restaurants', restaurantRoutes);
 app.use('/api/restaurants', menuRoutes);
 app.use('/api/search', require('./routes/searchRoutes'));
 app.use('/api/orders', orderRoutes);
+app.use('/api/orders', require('./routes/orderRoutes'));
 
 
 
