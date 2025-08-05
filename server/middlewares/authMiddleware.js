@@ -1,6 +1,29 @@
+// const jwt = require('jsonwebtoken');
+
+// exports.authenticate = (req, res, next) => {
+//   const authHeader = req.headers.authorization;
+//   if (!authHeader || !authHeader.startsWith('Bearer ')) {
+//     return res.status(401).json({ message: 'Access denied, token missing' });
+//   }
+
+//   const token = authHeader.split(' ')[1];
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = decoded; // attaches { id, role_id }
+//     next();
+//   } catch (err) {
+//     res.status(403).json({ message: 'Invalid token' });
+//   }
+// };
+
+
+
+
+
+
 const jwt = require('jsonwebtoken');
 
-exports.authenticate = (req, res, next) => {
+module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Access denied, token missing' });
@@ -9,7 +32,7 @@ exports.authenticate = (req, res, next) => {
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // attaches { id, role_id }
+    req.user = decoded;
     next();
   } catch (err) {
     res.status(403).json({ message: 'Invalid token' });
