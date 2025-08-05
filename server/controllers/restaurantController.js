@@ -1,4 +1,5 @@
 const restaurantModel = require('../models/restaurantModel');
+const menuModel = require('../models/menuModel');
 
 exports.getAllRestaurants = async (req, res) => {
   try {
@@ -41,3 +42,30 @@ exports.getNearbyRestaurants = (req, res) => {
     res.status(200).json({ restaurants });
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Get restaurant by ID
+exports.getRestaurantById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const restaurant = await restaurantModel.getRestaurantById(id);
+    if (!restaurant) return res.status(404).json({ message: 'Restaurant not found' });
+    res.json(restaurant);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to fetch restaurant' });
+  }
+};
+
+

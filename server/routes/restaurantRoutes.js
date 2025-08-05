@@ -9,4 +9,9 @@ router.get('/', restaurantController.getAllRestaurants);
 // This route expects latitude and longitude as query parameters
 router.get('/nearby', restaurantController.getNearbyRestaurants);
 
+
+// Route to get restaurant by ID
+router.get('/:id', restaurantController.getRestaurantById);
+
+
 module.exports = router;

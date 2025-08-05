@@ -44,3 +44,25 @@ exports.getNearbyRestaurants = (latitude, longitude, radius = 5, callback) => {
     callback(null, results);
   });
 };
+
+
+
+
+
+
+
+exports.getRestaurantById = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query("SELECT id, name, address, locality, rating FROM restaurants WHERE id = ?", [id], (err, results) => {
+      if (err) return reject(err);
+      if (results.length === 0) return resolve(null);
+      resolve(results[0]);
+    });
+  });
+};
+
+
+
+
+
+
