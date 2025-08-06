@@ -78,7 +78,27 @@ exports.getMyOrders = async (req, res) => {
 
 
 
+exports.trackOrder = async (req, res) => {
+  try {
+    const { order_id } = req.params;
+    const { user_id } = req.query; // ✅ ONLY from query
 
+    if (!order_id || !user_id) {
+      return res.status(400).json({ message: 'order_id and user_id are required' });
+    }
+
+    const order = await orderModel.getOrderStatus(order_id, user_id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json({ status: order.status, order });
+  } catch (error) {
+    console.error('Error tracking order:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 
 

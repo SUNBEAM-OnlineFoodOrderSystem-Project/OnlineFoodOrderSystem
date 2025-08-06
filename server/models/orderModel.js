@@ -43,3 +43,17 @@ exports.cancelOrder = async (orderId) => {
   );
 };
 
+
+
+
+exports.getOrderStatus = async (order_id, user_id) => {
+  const rows = await db.query(
+    `SELECT o.id AS order_id, o.status, o.created_at, r.name AS restaurant_name
+     FROM orders o
+     JOIN restaurants r ON o.restaurant_id = r.id
+     WHERE o.id = ? AND o.user_id = ?`,
+    [order_id, user_id]
+  );
+  return rows.length ? rows[0] : null;
+};
+
