@@ -1,10 +1,13 @@
-
-
-
 import React, { useEffect, useState } from 'react';
 import {
-  View, Text, FlatList, Button, ActivityIndicator,
-  TouchableOpacity, StyleSheet
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+  StyleSheet,
+  Button,
+  Platform,
 } from 'react-native';
 import { getMenuByRestaurantId } from '../services/restaurant.service';
 import { useCart } from '../context/CartContext';
@@ -31,21 +34,31 @@ const RestaurantMenuScreen = ({ route, navigation }) => {
   }, [restaurantId]);
 
   const handleAddToCart = (item) => {
-  addToCart({ ...item, restaurant_id: restaurantId }); 
-};
+    addToCart({ ...item, restaurant_id: restaurantId });
+  };
 
   const renderItem = ({ item }) => (
-    <View style={styles.menuItem}>
-      <Text style={styles.itemTitle}>{item.item_name} - ₹{item.price}</Text>
+    <View style={styles.menuCard}>
+      <Text style={styles.itemTitle}>
+        {item.item_name} - ₹{item.price}
+      </Text>
       <Text style={styles.itemDescription}>{item.description}</Text>
-      <Button title="Add to Cart" onPress={() => handleAddToCart(item)} />
+      <TouchableOpacity
+        onPress={() => handleAddToCart(item)}
+        style={styles.addButton}
+        activeOpacity={0.7}
+      >
+        <Text style={styles.addButtonText}>Add to Cart</Text>
+      </TouchableOpacity>
     </View>
   );
 
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
+  if (loading) {
+    return <ActivityIndicator size="large" style={{ marginTop: 40 }} />;
+  }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <Text style={styles.title}>{restaurantName}'s Menu</Text>
       <FlatList
         data={menuItems}
@@ -55,8 +68,13 @@ const RestaurantMenuScreen = ({ route, navigation }) => {
       />
 
       {cartItems.length > 0 && (
-        <TouchableOpacity style={styles.cartButton} onPress={() => navigation.navigate('Cart')}>
-          <Text style={styles.cartButtonText}>View Cart ({cartItems.length})</Text>
+        <TouchableOpacity
+          style={styles.cartButton}
+          onPress={() => navigation.navigate('Cart')}
+        >
+          <Text style={styles.cartButtonText}>
+            View Cart ({cartItems.length})
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -64,19 +82,73 @@ const RestaurantMenuScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  title: { fontSize: 22, padding: 16, fontWeight: 'bold' },
-  menuItem: { padding: 16, borderBottomWidth: 1, borderColor: '#ccc' },
-  itemTitle: { fontSize: 16 },
-  itemDescription: { color: 'gray', marginBottom: 8 },
+  container: {
+    flex: 1,
+    backgroundColor: '#f9fafc',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    padding: 16,
+    color: '#1a1a1a',
+  },
+  menuCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginBottom: 12,
+    borderRadius: 10,
+    padding: 16,
+    borderColor: '#eee',
+    borderWidth: 1,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.06,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#ccc',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+    }),
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 6,
+    color: '#333',
+  },
+  itemDescription: {
+    fontSize: 14,
+    color: '#777',
+    marginBottom: 12,
+  },
+  addButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 10,
+    borderRadius: 6,
+    alignItems: 'center',
+  },
+  addButtonText: {
+    color: '#fff',
+    fontWeight: '600',
+  },
   cartButton: {
     position: 'absolute',
-    bottom: 20, left: 20, right: 20,
+    bottom: 20,
+    left: 20,
+    right: 20,
     backgroundColor: '#2196F3',
-    padding: 15, borderRadius: 10,
+    paddingVertical: 15,
+    borderRadius: 12,
     alignItems: 'center',
   },
   cartButtonText: {
-    color: 'white', fontWeight: 'bold', fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
