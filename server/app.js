@@ -2,15 +2,17 @@
 const express = require('express');
 require('dotenv').config();
 
-
-
-
 const authRoutes = require('./routes/authRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const menuRoutes = require('./routes/menuRoutes');
-
 const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+
+
+
+
+// Importing restaurant authentication routes
+const restaurantAuthRoutes = require('./restaurant/routes/authRoutes');
 
 
 
@@ -26,6 +28,23 @@ app.use('/api/search', require('./routes/searchRoutes'));
 app.use('/api/orders', orderRoutes);
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/cart', cartRoutes);
+
+
+
+
+
+
+
+
+app.use('/api/restaurant', restaurantAuthRoutes);
+
+
+
+
+
+
+
+
 
 
 
