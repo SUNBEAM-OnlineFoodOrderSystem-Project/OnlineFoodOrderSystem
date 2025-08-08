@@ -1,0 +1,5 @@
+package com.foodapp.service.restaurant;
+
+public interface Dashboard {
+
+}

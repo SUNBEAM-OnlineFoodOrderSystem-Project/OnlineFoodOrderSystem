@@ -1,0 +1,13 @@
+package com.foodapp.service.restaurant;
+
+
+
+import com.foodapp.dto.restaurant.MenuItemDTO;
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+
+import java.util.List;
+
+public interface MenuService {
+    
+	
+}

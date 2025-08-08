@@ -1,0 +1,16 @@
+package com.foodapp.dto.restaurant;
+
+import lombok.Data;
+
+@Data
+@All
+
+public class UpdateOrderStatusDTO {
+
+	 private Integer orderId;
+	    private String status; 
+	
+	
+	
+	
+}

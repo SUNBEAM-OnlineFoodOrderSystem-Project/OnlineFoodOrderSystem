@@ -1,0 +1,5 @@
+package com.foodapp.controller.restaurant;
+
+public class MenuCategoryController {
+
+}

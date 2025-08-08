@@ -1,0 +1,23 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+
+//import com.foodapp.dto.restaurant.IncomingOrderDTO;
+import com.foodapp.dto.restaurant.PendingOrderDTO;
+import com.foodapp.dto.restaurant.UpdateOrderStatusDTO;
+import com.foodapp.model.Order;
+public interface OrderService {
+
+	
+	//List<IncomingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId);
+	
+//	List<Order> getIncomingOrdersForRestaurant(Integer restaurantId);
+//	List<Order> getPendingOrdersForRestaurant(Integer restaurantId);
+//	
+	 List<PendingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId);
+	    Order updateOrderStatus(UpdateOrderStatusDTO dto);
+	
+	
+	//Order updateOrderStatus(Integer orderId, String newStatus);
+	
+}

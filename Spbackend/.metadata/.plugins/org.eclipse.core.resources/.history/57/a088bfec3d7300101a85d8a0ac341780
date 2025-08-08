@@ -1,0 +1,21 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+
+public class OrderServiceImpl implements OrderService {
+
+	@Override
+	public List<IncomingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	}
+
+	
+	
+	
+	
+

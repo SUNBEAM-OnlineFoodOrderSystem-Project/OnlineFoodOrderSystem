@@ -1,0 +1,12 @@
+package com.foodapp.dto.restaurant;
+
+import lombok.Data;
+
+@Data
+public class MenuCategoryDTO {
+
+	    private Long id;
+	    private String catName;
+	    private String status; // active/inactive
+	
+}

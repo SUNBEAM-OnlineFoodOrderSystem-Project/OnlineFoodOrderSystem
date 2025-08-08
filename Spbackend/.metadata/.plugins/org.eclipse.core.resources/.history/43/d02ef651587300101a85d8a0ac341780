@@ -1,0 +1,68 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.foodapp.repository.OrderRepository;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+import com.foodapp.dto.restaurant.OrderItemDTO;
+import com.foodapp.dto.restaurant.PendingOrderDTO;
+import com.foodapp.model.Order;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+    private OrderRepository orderRepository;
+
+	@Override
+	public List<PendingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId) {
+		// TODO Auto-generated method stub
+		
+		List<Order> orders = orderRepository.findByRestaurant_IdAndStatusIn(
+                restaurantId,
+                List.of("placed", "accepted", "preparing")
+        );
+		
+		
+		return orders.stream().map(this::toPendingOrderDTO).collect(Collectors.toList());
+	}
+	
+
+	@Override
+	public Order updateOrderStatus(UpdateOrderStatusDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+//	@Override
+//	public List<Order> getIncomingOrdersForRestaurant(Integer restaurantId) {
+//		return orderRepository.findByRestaurantIdAndStatusIn(restaurantId,
+//                List.of("placed", "accepted", "preparing"));
+//		
+//		
+//		//return null;
+//	}
+//
+//	@Override
+//	public List<Order> getPendingOrdersForRestaurant(Integer restaurantId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Order updateOrderStatus(Integer orderId, String newStatus) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+	
+	
+}

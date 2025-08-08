@@ -1,0 +1,26 @@
+package com.foodapp.dto.restaurant;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
+
+
+public class DashboardSummaryDTO {
+	
+	    private long totalOrders;
+	    private double totalSales;
+	    private int menuItemCount;
+	    private int categoryCount;
+	    private long pendingOrders;
+	    private long todayOrders;
+	}
+
+	
+	
+
+}

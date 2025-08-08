@@ -1,0 +1,39 @@
+package com.foodapp.controller.restaurant;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+import com.foodapp.model.Order;
+import com.foodapp.service.restaurant.OrderServiceImpl;
+
+public class RestOrderConstoller {
+
+
+  @Autowired
+    private OrderServiceImpl orderService;
+
+//    @GetMapping("/incoming")
+//    public ResponseEntity<List<IncomingOrderDTO>> getIncomingOrders(@RequestParam Integer restaurantId) {
+//        List<IncomingOrderDTO> orders = orderService.getPendingOrdersForRestaurant(restaurantId);
+//        return ResponseEntity.ok(orders);
+//    }
+	
+    @GetMapping("/restaurant/{restaurantId}/incoming")
+    public ResponseEntity<List<Order>> viewIncomingOrders(@PathVariable Integer restaurantId) {
+        List<Order> incomingOrders = orderService.getIncomingOrdersForRestaurant(restaurantId);
+        return ResponseEntity.ok(incomingOrders);
+    }
+    
+    @GetMapping("/restaurant/{restaurantId}/pending")
+    public ResponseEntity<List<Order>> getPendingOrders(@PathVariable Integer restaurantId) {
+        List<Order> orders = orderService.getPendingOrdersForRestaurant(restaurantId);
+        return ResponseEntity.ok(orders);
+	
+	
+}

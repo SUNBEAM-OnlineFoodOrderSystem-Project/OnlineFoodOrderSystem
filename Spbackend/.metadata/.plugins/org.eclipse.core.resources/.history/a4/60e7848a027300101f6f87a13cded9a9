@@ -1,0 +1,18 @@
+package com.foodapp.service.restaurant;
+
+
+
+import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.foodapp.repository.MenuItemRepository;
+
+public interface MenuService<MenuItem> {
+    @Autowired
+    private MenuItemRepository itemRepo;
+    
+    public List<MenuItem> getAllItems() {
+        return itemRepo.findAll();
+    }
+	
+}

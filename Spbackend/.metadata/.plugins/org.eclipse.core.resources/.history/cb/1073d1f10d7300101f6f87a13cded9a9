@@ -1,0 +1,54 @@
+package com.foodapp.controller.restaurant;
+
+
+
+@RestController
+@RequestMapping("/api/menu-categories")
+public class MenuCategoryController {
+
+	
+
+public class Me
+    @Autowired
+    private MenuCategoryService service;
+
+    @GetMapping
+    public List<MenuCategory> getAllCategories() {
+        return service.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MenuCategory> getCategoryById(@PathVariable Long id) {
+        return service.getCategoryById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public MenuCategory createCategory(@RequestBody MenuCategory category) {
+        return service.saveCategory(category);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MenuCategory> updateCategory(@PathVariable Long id, @RequestBody MenuCategory category) {
+        return service.getCategoryById(id)
+                .map(existing -> {
+                    existing.setName(category.getName());
+                    return ResponseEntity.ok(service.saveCategory(existing));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        service.deleteCategory(id);
+        return ResponseEntity.ok().build();
+    }
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,46 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+import java.util.Optional;
+import java.uti
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.foodapp.model.MenuItem;
+import com.foodapp.repository.MenuItemRepository;
+
+@Service
+public class MenuServiceImpl {
+
+	@Autowired
+	private MenuItemRepository repository;
+     
+	 public List<MenuItem> getAllItems() {
+	        return repository.findAll();
+	    }
+
+	    public Optional<MenuItem> getItemById(Integer id) {
+	        return repository.findById(id);
+	    }
+	
+	    public MenuItem addItem(MenuItem item) {
+	        return repository.save(item);
+	    }
+	    
+	    public MenuItem updateItem(Integer id, MenuItem updatedItem) {
+	        return repository.findById(id).map(item -> {
+	            item.setItemName(updatedItem.getItemName());
+	            item.setCategoryId(updatedItem.getCategoryId());
+	            item.setPrice(updatedItem.getPrice());
+	            item.setImageUrl(updatedItem.getImageUrl());
+	            return repository.save(item);
+	        }).orElseThrow(() -> new RuntimeException("Item not found"));
+	    }
+	    
+	    public void deleteItem(Integer id) {
+	        repository.deleteById(id);
+	    }  
+	    
+	    
+}

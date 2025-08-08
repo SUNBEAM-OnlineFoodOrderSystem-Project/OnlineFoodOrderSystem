@@ -1,0 +1,66 @@
+package com.foodapp.controller.restaurant;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.foodapp.model.MenuCategory;
+import com.foodapp.service.restaurant.MenuCategoryServiceImpl;
+
+@RestController
+@RequestMapping("/api/menu-categories")
+public class MenuCategoryController {
+
+
+    @Autowired
+    private MenuCategoryServiceImpl service;
+
+    @GetMapping
+    public List<MenuCategory> getAllCategories() {
+        return service.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MenuCategory> getCategoryById(@PathVariable Integer id) {
+        return service.getCategoryById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public MenuCategory createCategory(@RequestBody MenuCategory category) {
+        return service.saveCategory(category);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MenuCategory> updateCategory(@PathVariable Integer id, @RequestBody MenuCategory category) {
+        return service.getCategoryById(id)
+                .map(existing -> {
+                    existing.setCatName(category.getCatName());
+                    return ResponseEntity.ok(service.saveCategory(existing));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+        service.deleteCategory(id);
+        return ResponseEntity.ok().build();
+    }
+	
+	
+	
+	
+	
+	
+	
+}

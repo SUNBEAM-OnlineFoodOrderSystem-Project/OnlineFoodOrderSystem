@@ -1,0 +1,66 @@
+package com.foodapp.controller.restaurant;
+
+
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+import com.foodapp.dto.restaurant.MenuItemDTO;
+import com.foodapp.service.restaurant.MenuService;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/restaurant/menu")
+@RequiredArgsConstructor
+public class MenuController {
+
+    private  MenuService menuService;
+
+    // ----- Categories ----- //
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<MenuCategoryDTO>> getAllCategories() {
+        return ResponseEntity.ok(menuService.getAllCategories());
+    }
+
+    @PostMapping("/categories")
+    public ResponseEntity<MenuCategoryDTO> createCategory(@RequestBody MenuCategoryDTO dto) {
+        return ResponseEntity.ok(menuService.createCategory(dto));
+    }
+
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<MenuCategoryDTO> updateCategory(@PathVariable Long id, @RequestBody MenuCategoryDTO dto) {
+        return ResponseEntity.ok(menuService.updateCategory(id, dto));
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        menuService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // ----- Menu Items ----- //
+
+    @GetMapping("/items")
+    public ResponseEntity<List<MenuItemDTO>> getAllMenuItems() {
+        return ResponseEntity.ok(menuService.getAllMenuItems());
+    }
+
+    @PostMapping("/items")
+    public ResponseEntity<MenuItemDTO> addItem(@RequestBody MenuItemDTO dto) {
+        return ResponseEntity.ok(menuService.addItem(dto));
+    }
+
+    @PutMapping("/items/{id}")
+    public ResponseEntity<MenuItemDTO> updateItem(@PathVariable Long id, @RequestBody MenuItemDTO dto) {
+        return ResponseEntity.ok(menuService.updateItem(id, dto));
+    }
+
+    @DeleteMapping("/items/{id}")
+    public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
+        menuService.deleteItem(id);
+        return ResponseEntity.noContent().build();
+    }
+}

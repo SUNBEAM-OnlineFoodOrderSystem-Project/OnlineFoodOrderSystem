@@ -1,0 +1,19 @@
+package com.foodapp.dto.restaurant;
+
+
+@Data
+
+public class DashboardSummaryDTO {
+	
+	    private long totalOrders;
+	    private double totalSales;
+	    private int menuItemCount;
+	    private int categoryCount;
+	    private long pendingOrders;
+	    private long todayOrders;
+	}
+
+	
+	
+
+}

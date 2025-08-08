@@ -1,0 +1,11 @@
+package com.foodapp.service.restaurant;
+
+
+
+
+public interface MenuService {
+    @Autowired
+    private MenuItemRepository 
+	
+	
+}

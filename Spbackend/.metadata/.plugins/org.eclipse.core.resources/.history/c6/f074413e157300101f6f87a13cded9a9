@@ -1,0 +1,21 @@
+package com.foodapp.dto.restaurant;
+
+@Data
+@AllArgsConstructor
+
+
+public class IncomingOrderDTO {
+
+	 private Long orderId;
+	    private String customerName;
+	    private LocalDateTime orderTime;
+	    private List<OrderItemDTO> items;
+	    private double totalAmount;
+	    private String status;
+	
+	
+	
+	
+}
+
+

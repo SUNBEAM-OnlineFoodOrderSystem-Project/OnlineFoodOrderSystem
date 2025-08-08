@@ -1,0 +1,16 @@
+package com.foodapp.repository;
+
+
+	
+	
+	
+	public interface UserRepository extends JpaRepository<User, Long> {
+	    Optional<User> findByEmail(String email);
+	}
+
+	public interface RoleRepository extends JpaRepository<Role, Long> {
+	    Optional<Role> findByRoleName(String roleName);
+	}
+
+	
+}

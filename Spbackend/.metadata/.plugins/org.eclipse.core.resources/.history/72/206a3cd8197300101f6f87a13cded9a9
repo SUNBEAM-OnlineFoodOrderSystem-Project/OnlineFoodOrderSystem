@@ -1,0 +1,18 @@
+package com.foodapp.model;
+
+public class Order {
+
+	@ManyToOne
+	@JoinColumn(name = "restaurant_id")
+	private Restaurant restaurant;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@OneToMany(mappedBy = "order")
+	private List<OrderItem> items;
+	
+	
+	
+}

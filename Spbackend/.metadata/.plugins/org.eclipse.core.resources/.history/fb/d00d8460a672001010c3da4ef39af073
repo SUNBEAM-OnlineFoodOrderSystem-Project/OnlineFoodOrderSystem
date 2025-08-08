@@ -1,0 +1,175 @@
+package com.foodapp.model;
+
+
+
+import jakarta.persistence.*;
+//import lombok.*;
+
+//@Entity
+//@Table(name = "menus")
+//@Data
+//public class MenuItem {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    private Long restaurantId;
+//
+//    private Long categoryId;
+//
+//    private String itemName;
+//
+//    @Column(columnDefinition = "TEXT")
+//    private String description;
+//
+//    private String imageUrl;
+//
+//    private Float price;
+//
+//    private Float rating;
+//
+//    @Enumerated(EnumType.STRING)
+//    private Status status;
+//
+//    public enum Status {
+//        active, inactive
+//    }
+//}
+
+package com.foodapp.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "menus")
+public class MenuItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "restaurant_id", nullable = false)
+    private Long restaurantId;
+
+    @Column(name = "category_id", nullable = false)
+    private Long categoryId;
+
+    @Column(name = "item_name", nullable = false)
+    private String itemName;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(nullable = false)
+    private Float price;
+
+    private Float rating;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status {
+        active,
+        inactive
+    }
+
+    // --- Constructors ---
+
+    public MenuItem() {
+        // no-arg constructor
+    }
+
+    public MenuItem(Long id, Long restaurantId, Long categoryId, String itemName, String description,
+                    String imageUrl, Float price, Float rating, Status status) {
+        this.id = id;
+        this.restaurantId = restaurantId;
+        this.categoryId = categoryId;
+        this.itemName = itemName;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.rating = rating;
+        this.status = status;
+    }
+
+    // --- Getters and Setters ---
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(Long restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+}
+
+
+
+

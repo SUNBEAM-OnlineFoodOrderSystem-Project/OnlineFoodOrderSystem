@@ -1,0 +1,49 @@
+package com.foodapp.model;
+
+//package com.foodapp.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+import javax.management.relation.Role;
+
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class User {
+
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.INACTIVE;
+
+    private Timestamp phoneVerifiedAt;
+    private Timestamp emailVerifiedAt;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    private Timestamp updatedAt;
+
+    public enum Status {
+        inactive, active, blocked
+    }
+	
+}
+
+
