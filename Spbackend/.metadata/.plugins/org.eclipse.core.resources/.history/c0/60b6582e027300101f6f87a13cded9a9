@@ -1,0 +1,13 @@
+package com.foodapp.service.restaurant;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.foodapp.repository.MenuItemRepository;
+
+public interface MenuService {
+    @Autowired
+    private MenuItemRepository itemRepo;
+    
+	
+	
+}

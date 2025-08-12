@@ -1,0 +1,14 @@
+package com.foodapp.service.restaurant;
+
+
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	}
+
+	
+	
+	
+	
+}

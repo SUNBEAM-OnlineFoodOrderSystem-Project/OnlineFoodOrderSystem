@@ -1,0 +1,17 @@
+package com.foodapp.service.restaurant;
+
+public class DashboardService {
+
+	
+
+	
+
+	public interface DashboardService {
+	    DashboardSummaryDTO getSummary();
+	}
+
+	
+	
+	
+	
+}

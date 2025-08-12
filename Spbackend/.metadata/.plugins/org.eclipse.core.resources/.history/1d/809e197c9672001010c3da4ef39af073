@@ -1,0 +1,47 @@
+package com.foodapp.services.restaurant;
+
+
+//package com.foodapp.services.restaurant;
+
+import java.util.List;
+
+
+import com.foodapp.dto.restaurant.MenuItemDTO;
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+
+public interface MenuService {
+
+	List<MenuCategoryDTO> getAllCategories();
+
+	MenuCategoryDTO createCategory(MenuCategoryDTO dto);
+
+	MenuCategoryDTO updateCategory(Long id, MenuCategoryDTO dto);
+
+	void deleteCategory(Long id);
+	
+
+	List<MenuItemDTO> getAllMenuItems();
+
+	MenuItemDTO addItem(MenuItemDTO dto);
+
+	MenuItemDTO updateItem(Long id, MenuItemDTO dto);
+
+	void deleteItem(Long id);
+
+	
+	
+	
+	
+	
+}
+
+//
+//List<MenuCategoryDTO> getAllCategories();
+//MenuCategoryDTO createCategory(MenuCategoryDTO dto);
+//MenuCategoryDTO updateCategory(Long id, MenuCategoryDTO dto);
+//void deleteCategory(Long id);
+//
+//List<MenuItemDTO> getAllMenuItems();
+//MenuItemDTO addItem(MenuItemDTO dto);
+//MenuItemDTO updateItem(Long id, MenuItemDTO dto);
+//void deleteItem(Long id);

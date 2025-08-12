@@ -1,0 +1,19 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+public interface OrderService {
+
+	
+	List<IncomingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId);
+	
+	
+	@Repository
+	public interface OrderRepository extends JpaRepository<Order, Integer> {
+
+	    @Query("SELECT o FROM Order o WHERE o.restaurant.id = :restaurantId AND o.status IN ('placed', 'accepted', 'delivered')")
+	    List<Order> findIncomingOrdersByRestaurantId(@Param("restaurantId") Integer restaurantId);
+	}
+	
+}

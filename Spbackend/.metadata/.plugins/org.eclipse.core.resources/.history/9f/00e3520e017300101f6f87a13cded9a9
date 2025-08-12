@@ -1,0 +1,51 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+import com.foodapp.dto.restaurant.MenuItemDTO;
+import com.foodapp.model.MenuCategory;
+import com.foodapp.repository.MenuCategoryRepository;
+import com.foodapp.repository.MenuItemRepository;
+
+public class MenuServiceImpl implements MenuService {
+
+	@Autowired
+	private MenuCategoryRepository categoryRepo;;
+	
+	@Autowired
+	private MenuItemRepository itemRepo;
+
+	@Override
+	public List<MenuCategoryDTO> getAllCategories() {
+		
+	
+		return categoryRepo.findAll().stream().map(this::toCategoryDTO).collect(Collectors.toList());
+	}
+	
+	@Override
+    public void deleteItem(Long id) {
+        itemRepo.deleteById(id);
+    }
+
+	
+	private MenuCategoryDTO toCategoryDTO(MenuCategory cat) {
+        MenuCategoryDTO dto = new MenuCategoryDTO();
+        dto.setId(cat.getId());
+        dto.setCatName(cat.getCatName());
+        dto.setStatus(cat.getStatus().name());
+        return dto;
+    }
+
+	@Override
+	public void deleteCategory(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+		
+
+}

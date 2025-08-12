@@ -1,0 +1,14 @@
+package com.foodapp.controller.restaurant;
+
+
+
+@RestController
+@RequestMapping("/api/dashboard")
+@RequiredArgsConstructor
+public class DashboardController {
+
+	
+	
+	
+	
+}

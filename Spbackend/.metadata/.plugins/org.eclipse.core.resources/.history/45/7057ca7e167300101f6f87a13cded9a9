@@ -1,0 +1,18 @@
+package com.foodapp.controller.restaurant;
+
+public class RestOrderConstoller {
+
+	
+	
+
+    private final OrderService orderService;
+
+    @GetMapping("/incoming")
+    public ResponseEntity<List<IncomingOrderDTO>> getIncomingOrders(@RequestParam Long restaurantId) {
+        List<IncomingOrderDTO> orders = orderService.getPendingOrdersForRestaurant(restaurantId);
+        return ResponseEntity.ok(orders);
+    }
+	
+	
+	
+}

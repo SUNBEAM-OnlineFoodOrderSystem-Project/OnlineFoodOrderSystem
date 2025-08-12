@@ -1,0 +1,58 @@
+package com.foodapp.service.restaurant;
+
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.foodapp.dto.restaurant.DashboardSummaryDTO;
+import com.foodapp.repository.MenuCategoryRepository;
+import com.foodapp.repository.MenuItemRepository;
+import com.foodapp.repository.OrderRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+
+public class DashboardService {
+
+  @Autowired
+    private  OrderRepository orderRepo;
+  @Autowired
+    private  MenuItemRepository menuItemRepo;
+  @Autowired
+    private  MenuCategoryRepository categoryRepo;
+
+    
+    public DashboardSummaryDTO getSummary() {
+        long totalOrders = orderRepo.count();
+      //  double totalSales = orderRepo.getTotalSales(); // Custom query needed
+        int menuItemCount = (int) menuItemRepo.count();
+        int categoryCount = (int) categoryRepo.count();
+        long pendingOrders = orderRepo.countByStatus("PENDING");
+        long todayOrders = orderRepo.countByDate(LocalDate.now());
+        
+        return new DashboardSummaryDTO(
+        		totalOrders,
+           // totalSales,
+            menuItemCount,
+            categoryCount,
+            pendingOrders,
+            todayOrders
+        		);
+
+//        return new DashboardSummaryDTO(
+//                totalOrders,
+//                totalSales,
+//                menuItemCount,
+//                categoryCount,
+//                pendingOrders,
+//                todayOrders
+//        );
+    }
+}	
+	
+	
+	
+	

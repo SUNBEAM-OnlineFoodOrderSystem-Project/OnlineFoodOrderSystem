@@ -1,0 +1,30 @@
+
+package com.foodapp.model;
+
+//package com.foodapp.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "menu_categories")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MenuCategory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "cat_name", nullable = false)
+    private String catName;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status {
+        active,
+        inactive
+    }
+}

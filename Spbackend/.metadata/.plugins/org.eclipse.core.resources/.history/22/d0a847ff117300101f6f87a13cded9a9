@@ -1,0 +1,17 @@
+package com.foodapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+public class OrderRepository extends JpaRepository {
+
+	@Query("SELECT SUM(o.totalAmount) FROM Order o")
+	double getTotalSales();
+
+	long countByStatus(String status);
+
+	@Query("SELECT COUNT(o) FROM Order o WHERE DATE(o.orderDate) = :date")
+	long countByDate(@Param("date") LocalDate date);
+
+	
+	
+	
+}

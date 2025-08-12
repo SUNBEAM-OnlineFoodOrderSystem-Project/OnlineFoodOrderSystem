@@ -1,0 +1,38 @@
+package com.foodapp.model;
+
+
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "menus")
+@Data
+public class MenuItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long restaurantId;
+
+    private Long categoryId;
+
+    private String itemName;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    private String imageUrl;
+
+    private Float price;
+
+    private Float rating;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status {
+        active, inactive
+    }
+}
+

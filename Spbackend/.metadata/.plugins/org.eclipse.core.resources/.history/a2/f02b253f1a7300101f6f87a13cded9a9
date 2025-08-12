@@ -1,0 +1,71 @@
+package com.foodapp.model;
+
+package com.foodapp.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "role_id", nullable = false)
+    private Integer roleId;
+
+    @Column(name = "full_name", length = 100)
+    private String fullName;
+
+    @Column(name = "email", length = 100, unique = true)
+    private String email;
+
+    @Column(name = "phone_number", length = 20, unique = true)
+    private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('inactive','active','blocked') DEFAULT 'inactive'")
+    private Status status = Status.inactive;
+
+    @Column(name = "phone_verified_at")
+    private LocalDateTime phoneVerifiedAt;
+
+    @Column(name = "email_verified_at")
+    private LocalDateTime emailVerifiedAt;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private String password;
+
+    // Optional: PrePersist and PreUpdate to handle timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public enum Status {
+        inactive,
+        active,
+        blocked
+    }
+}
+
+

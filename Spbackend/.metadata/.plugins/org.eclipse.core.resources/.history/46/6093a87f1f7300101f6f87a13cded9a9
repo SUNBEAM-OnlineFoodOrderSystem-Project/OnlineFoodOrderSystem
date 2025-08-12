@@ -1,0 +1,44 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.foodapp.repository.OrderRepository;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+import com.foodapp.dto.restaurant.OrderItemDTO;
+//import com.foodapp.model.Order;
+//import com.foodapp.model.Order;
+
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+    private OrderRepository orderRepo;
+	
+	public List<IncomingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId) {
+	    //List<Order> orders = orderRepo.findPendingOrdersByRestaurantId(restaurantId);
+		List
+
+	    return orders.stream().map(order -> {
+	        List<OrderItemDTO> items = order.getItems().stream()
+	            .map(i -> new OrderItemDTO(i.getMenuItem().getName(), i.getQuantity()))
+	            .collect(Collectors.toList());
+
+	        return new IncomingOrderDTO(
+	            order.getId(),
+	            order.getUser().getFullName(),
+	            order.getOrderTime(),
+	            items,
+	            order.getTotalAmount(),
+	            order.getStatus()
+	        );
+	    }).collect(Collectors.toList());
+	}
+
+	
+	
+	
+	
+}

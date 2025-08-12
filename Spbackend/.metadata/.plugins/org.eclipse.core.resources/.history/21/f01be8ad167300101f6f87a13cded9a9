@@ -1,0 +1,23 @@
+package com.foodapp.controller.restaurant;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.foodapp.service.restaurant.OrderService;
+
+public class RestOrderConstoller {
+
+
+  @Autowired
+    private OrderService orderService;
+
+    @GetMapping("/incoming")
+    public ResponseEntity<List<IncomingOrderDTO>> getIncomingOrders(@RequestParam  restaurantId) {
+        List<IncomingOrderDTO> orders = orderService.getPendingOrdersForRestaurant(restaurantId);
+        return ResponseEntity.ok(orders);
+    }
+	
+	
+	
+}

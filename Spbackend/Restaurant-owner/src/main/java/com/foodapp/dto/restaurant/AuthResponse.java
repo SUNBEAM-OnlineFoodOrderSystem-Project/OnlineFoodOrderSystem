@@ -1,0 +1,5 @@
+package com.foodapp.dto.restaurant;
+
+public class AuthResponse {
+
+}

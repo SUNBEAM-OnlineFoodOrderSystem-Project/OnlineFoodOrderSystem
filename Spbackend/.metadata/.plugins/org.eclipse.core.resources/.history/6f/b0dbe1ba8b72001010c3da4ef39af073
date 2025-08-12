@@ -1,0 +1,5 @@
+package com.foodapp.services.restaurant;
+
+public class MenuServiceImpl {
+
+}

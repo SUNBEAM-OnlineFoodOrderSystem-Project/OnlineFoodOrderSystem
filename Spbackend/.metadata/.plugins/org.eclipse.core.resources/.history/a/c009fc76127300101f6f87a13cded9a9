@@ -1,0 +1,20 @@
+package com.foodapp.controller.restaurant;
+
+
+
+@RestController
+@RequestMapping("/api/dashboard")
+@RequiredArgsConstructor
+public class DashboardController {
+
+	
+	@
+	
+	@GetMapping("/summary")
+    public DashboardSummaryDTO getSummary() {
+        return dashboardService.getSummary();
+    }
+	
+	
+	
+}

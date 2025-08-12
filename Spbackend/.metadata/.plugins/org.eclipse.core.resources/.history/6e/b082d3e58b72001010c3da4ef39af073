@@ -1,0 +1,116 @@
+package com.foodapp.services.restaurant;
+
+
+package com.foodapp.service;
+
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+import com.foodapp.dto.restaurant.MenuItemDTO;
+import com.foodapp.model.MenuCategory;
+import com.foodapp.model.MenuItem;
+import com.foodapp.repository.MenuCategoryRepository;
+import com.foodapp.repository.MenuItemRepository;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class MenuServiceImpl implements MenuService {
+
+    private final MenuCategoryRepository categoryRepo;
+    private final MenuItemRepository itemRepo;
+
+    // ----------- Categories ----------- //
+    @Override
+    public List<MenuCategoryDTO> getAllCategories() {
+        return categoryRepo.findAll().stream().map(this::toCategoryDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public MenuCategoryDTO createCategory(MenuCategoryDTO dto) {
+        MenuCategory cat = new MenuCategory();
+        cat.setCatName(dto.getCatName());
+        cat.setStatus(MenuCategory.Status.valueOf(dto.getStatus()));
+        return toCategoryDTO(categoryRepo.save(cat));
+    }
+
+    @Override
+    public MenuCategoryDTO updateCategory(Long id, MenuCategoryDTO dto) {
+        MenuCategory cat = categoryRepo.findById(id).orElseThrow();
+        cat.setCatName(dto.getCatName());
+        cat.setStatus(MenuCategory.Status.valueOf(dto.getStatus()));
+        return toCategoryDTO(categoryRepo.save(cat));
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        categoryRepo.deleteById(id);
+    }
+
+    private MenuCategoryDTO toCategoryDTO(MenuCategory cat) {
+        MenuCategoryDTO dto = new MenuCategoryDTO();
+        dto.setId(cat.getId());
+        dto.setCatName(cat.getCatName());
+        dto.setStatus(cat.getStatus().name());
+        return dto;
+    }
+
+    // ----------- Menu Items ----------- //
+    @Override
+    public List<MenuItemDTO> getAllMenuItems() {
+        return itemRepo.findAll().stream().map(this::toItemDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public MenuItemDTO addItem(MenuItemDTO dto) {
+        MenuItem item = toEntity(dto);
+        return toItemDTO(itemRepo.save(item));
+    }
+
+    @Override
+    public MenuItemDTO updateItem(Long id, MenuItemDTO dto) {
+        MenuItem item = itemRepo.findById(id).orElseThrow();
+        item.setCategoryId(dto.getCategoryId());
+        item.setItemName(dto.getItemName());
+        item.setDescription(dto.getDescription());
+        item.setImageUrl(dto.getImageUrl());
+        item.setPrice(dto.getPrice());
+        item.setStatus(MenuItem.Status.valueOf(dto.getStatus()));
+        return toItemDTO(itemRepo.save(item));
+    }
+
+    @Override
+    public void deleteItem(Long id) {
+        itemRepo.deleteById(id);
+    }
+
+    private MenuItemDTO toItemDTO(MenuItem item) {
+        MenuItemDTO dto = new MenuItemDTO();
+        dto.setId(item.getId());
+        dto.setRestaurantId(item.getRestaurantId());
+        dto.setCategoryId(item.getCategoryId());
+        dto.setItemName(item.getItemName());
+        dto.setDescription(item.getDescription());
+        dto.setImageUrl(item.getImageUrl());
+        dto.setPrice(item.getPrice());
+        dto.setRating(item.getRating());
+        dto.setStatus(item.getStatus().name());
+        return dto;
+    }
+
+    private MenuItem toEntity(MenuItemDTO dto) {
+        MenuItem item = new MenuItem();
+        item.setRestaurantId(dto.getRestaurantId());
+        item.setCategoryId(dto.getCategoryId());
+        item.setItemName(dto.getItemName());
+        item.setDescription(dto.getDescription());
+        item.setImageUrl(dto.getImageUrl());
+        item.setPrice(dto.getPrice());
+        item.setRating(dto.getRating());
+        item.setStatus(MenuItem.Status.valueOf(dto.getStatus()));
+        return item;
+    }
+}

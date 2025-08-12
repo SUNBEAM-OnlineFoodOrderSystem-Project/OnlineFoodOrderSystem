@@ -1,0 +1,16 @@
+package com.foodapp.repository;
+
+public class OrderRepository extends JpaRe{
+
+	@Query("SELECT SUM(o.totalAmount) FROM Order o")
+	double getTotalSales();
+
+	long countByStatus(String status);
+
+	@Query("SELECT COUNT(o) FROM Order o WHERE DATE(o.orderDate) = :date")
+	long countByDate(@Param("date") LocalDate date);
+
+	
+	
+	
+}

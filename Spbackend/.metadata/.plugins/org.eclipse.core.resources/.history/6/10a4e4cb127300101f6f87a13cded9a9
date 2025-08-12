@@ -1,0 +1,22 @@
+package com.foodapp.controller.restaurant;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/dashboard")
+@RequiredArgsConstructor
+public class DashboardController {
+
+	
+	@Autowired
+	private DashboardService dashboardService;
+	
+	@GetMapping("/summary")
+    public DashboardSummaryDTO getSummary() {
+        return dashboardService.getSummary();
+    }
+	
+	
+	
+}

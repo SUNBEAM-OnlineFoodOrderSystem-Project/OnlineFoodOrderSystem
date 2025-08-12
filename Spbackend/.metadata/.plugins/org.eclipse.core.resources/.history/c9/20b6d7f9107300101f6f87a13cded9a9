@@ -1,0 +1,20 @@
+package com.foodapp.service.restaurant;
+
+
+import org.springframework.stereotype.Service;
+
+import com.foodapp.dto.DashboardSummaryDTO;
+public class DashboardService {
+
+	
+@Service
+
+	public interface DashboardService {
+	    DashboardSummaryDTO getSummary();
+	}
+
+	
+	
+	
+	
+}

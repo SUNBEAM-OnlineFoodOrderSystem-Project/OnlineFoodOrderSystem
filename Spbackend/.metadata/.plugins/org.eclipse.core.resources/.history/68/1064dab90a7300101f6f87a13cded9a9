@@ -1,0 +1,10 @@
+package com.foodapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.foodapp.dto.restaurant.MenuCategoryDTO;
+
+public interface MenuCategoryRepository extends JpaRepository<MenuCategory, Integer> {
+
+
+}

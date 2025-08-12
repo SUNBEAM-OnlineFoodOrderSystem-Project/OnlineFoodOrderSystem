@@ -1,0 +1,13 @@
+package com.foodapp.service.restaurant;
+
+import java.util.List;
+
+import com.foodapp.dto.restaurant.IncomingOrderDTO;
+public interface OrderService {
+
+	
+	List<IncomingOrderDTO> getPendingOrdersForRestaurant(Integer restaurantId);
+	
+	
+	
+}

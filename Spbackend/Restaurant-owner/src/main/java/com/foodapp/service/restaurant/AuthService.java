@@ -1,0 +1,7 @@
+package com.foodapp.service.restaurant;
+
+public class AuthService {
+
+	
+	
+}

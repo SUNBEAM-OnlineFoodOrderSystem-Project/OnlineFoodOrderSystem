@@ -1,0 +1,11 @@
+package com.foodapp.security;
+
+public class JwtUtil {
+
+	private String secret = "mySecretKey";
+
+	
+	
+	
+	
+}

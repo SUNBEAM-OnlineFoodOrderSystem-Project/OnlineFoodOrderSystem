@@ -1,0 +1,23 @@
+package com.foodapp.dto.restaurant;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MenuItemDTO {
+
+	private Long id;
+	private Long restaurantId;
+	private Long categoryId;
+	private String itemName;
+	private String description;
+	private String imageUrl;
+	private Float price;
+	private Float rating;
+	private String status; // active/inactive
+
+}
+

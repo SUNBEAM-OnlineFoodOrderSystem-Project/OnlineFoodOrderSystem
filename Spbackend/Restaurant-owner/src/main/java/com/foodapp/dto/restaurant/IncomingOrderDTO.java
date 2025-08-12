@@ -1,0 +1,31 @@
+package com.foodapp.dto.restaurant;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+
+@Data
+
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class IncomingOrderDTO {
+
+	 private Long orderId;
+	    private String customerName;
+	    private LocalDateTime orderTime;
+	    private List<OrderItemDTO> items;
+	    private double totalAmount;
+	    private String status;
+	
+	
+	
+	
+}
+
+
